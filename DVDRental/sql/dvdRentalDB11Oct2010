@@ -1,0 +1,55 @@
+CREATE TABLE dvdRentalDb.access (
+	aid int(10) NOT NULL auto_increment,
+	mask varchar(255) NOT NULL,
+	type varchar(255) NOT NULL,
+	status tinyint(3) NOT NULL,
+	PRIMARY KEY (aid)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8	
+CREATE TABLE dvdRentalDb.customer_address (
+	customer_id int(10) NOT NULL,
+	address varchar(50),
+	city varchar(25),
+	state varchar(25),
+	country varchar(25),
+	zip_code int(10),
+	status tinyint(3)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1	
+CREATE TABLE dvdRentalDb.customer_contact (
+	custid int(10) NOT NULL,
+	email_id varchar(100) NOT NULL,
+	cell_phone varchar(25),
+	home_phone varchar(25),
+	office_phone varchar(25)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1	
+CREATE TABLE dvdRentalDb.customer_info (
+	custid int(10) NOT NULL auto_increment,
+	firstName varchar(30),
+	lastName varchar(30),
+	memberType int(10),
+	subscriptionDate datetime,
+	status tinyint(3),
+	PRIMARY KEY (custid)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1	
+CREATE TABLE dvdRentalDb.customer_shipping (
+	custid int(10) NOT NULL,
+	address varchar(25),
+	city varchar(25),
+	state varchar(25),
+	country varchar(25),
+	zip_code int(10),
+	status tinyint(3)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1	
+CREATE TABLE dvdRentalDb.login (
+	custid int(10) NOT NULL,
+	user_name varchar(50) NOT NULL,
+	password varchar(100) NOT NULL,
+	type smallint(5)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1	
+CREATE TABLE dvdRentalDb.membership_types (
+	membership_id int(10) NOT NULL auto_increment,
+	name varchar(25) NOT NULL,
+	description varchar(500),
+	amount int(10) NOT NULL,
+	status tinyint(3),
+	PRIMARY KEY (membership_id)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1	

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Deploy From Eclipse to Tomcat" basedir=".">
+<loadproperties>
+      <file file="application.properties"/>
+</loadproperties>
+<property name="warfile" value="${application_name}"/>
+<property name="tomcat" value="${tomcat_path}"></property>
+<target name="unpack">
+<unwar src="${warfile}.war" dest="${warfile}" />
+</target>
+<target name="create">
+<war destfile="${warfile}.war" webxml="WebContent/WEB-INF/web.xml" update="true">
+<classes dir="build/classes"/>
+<fileset dir="WebContent/WEB-INF">
+<exclude name="WebContent/WEB-INF/web.xml"/>
+</fileset>
+<fileset dir=".">
+<include name="application.properties"/>
+<include name="application.log"/>
+</fileset>
+</war>
+</target>
+<target name="copy">
+<copy todir="${tomcat}/webapps" overwrite="true" file="DVDRental.war"/>
+<copy todir="${tomcat}/lib" overwrite="true">
+<fileset dir="lib"></fileset>
+</copy>
+</target>
+<target name="delete">
+<delete file="${warfile}.war"></delete>
+</target>
+<target name="deploy">
+<antcall target="delete"></antcall>
+<antcall target="create"/>
+<antcall target="copy"/>
+</target>
+</project>

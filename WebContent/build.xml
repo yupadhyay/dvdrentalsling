@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Deploy From Eclipse to Tomcat" basedir=".">
+<property name="warfile" value="DVDRental"/>
+<target name="unpack">
+<unwar src="${warfile}.war" dest="${warfile}" />
+</target>
+<target name="create">
+<war destfile="${warfile}.war" webxml="WEB-INF/web.xml" update="true">
+<classes dir="../build/classes"/>
+<fileset dir="WEB-INF">
+<exclude name="WEB-INF/web.xml"/>
+</fileset>
+</war>
+</target>
+<target name="copy">
+<copy todir="/Library/Tomcat/Home/webapps" overwrite="true">
+<fileset dir=".">
+<include name="DVDRental.war"/>
+</fileset>
+</copy>
+</target>
+<target name="delete">
+<delete file="${warfile}.war"></delete>
+</target>
+<target name="deploy">
+<antcall target="delete"></antcall>
+<antcall target="create"/>
+<antcall target="copy"/>
+</target>
+</project>
